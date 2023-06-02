@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
+import { PersonModule } from './models/person.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       typePaths: ['./**/*.graphql'],
       playground: false,
     }),
+    PersonModule
   ],
   controllers: [AppController],
   providers: [AppService],
