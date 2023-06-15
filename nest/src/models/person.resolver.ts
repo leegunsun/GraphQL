@@ -8,6 +8,7 @@ export class PersonResolver {
 
   @Query(() => [Person])
   async getAllPerson() {
+    console.log('testtest');
     return await this.personService.findAll();
   }
 }
