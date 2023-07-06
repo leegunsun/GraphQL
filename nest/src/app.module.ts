@@ -3,6 +3,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 // import { PersonModule } from './models/person.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PersonModule } from './models/person.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      autoSchemaFile: 'schema.gpl',
       typePaths: ['./**/*.graphql'],
     }),
 

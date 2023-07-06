@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-const DATABASE_NAME = 'GraphQL';
+const DATABASE_NAME = 'graphQL';
 
 export const databaseProviders = [
   {
