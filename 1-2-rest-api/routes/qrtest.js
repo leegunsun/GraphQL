@@ -2,7 +2,7 @@ const express = require('express')
 const api = express.Router()
 
 api.get('/ios', (req, res) => {
-    return {
+    let testsend = {
              "applinks": {
                "apps": [],
                "details": [
@@ -12,9 +12,13 @@ api.get('/ios', (req, res) => {
                  }
                ]
              }
-           }
+  }
+  
+  res.send(testsend)
 })
 
 api.get('/an', (req, res) => {
-
+  return;
 })
+
+module.exports = api
