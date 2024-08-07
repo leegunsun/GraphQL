@@ -14,13 +14,14 @@ const port = 3000
 app.use(express.json())
 app.use(express.urlencoded())
 
+app.use('/.well-known/apple-app-site-association', qrtest)
 app.use('/api/team', teamRouter)
 app.use('/api/people', peopleRouter)
 app.use('/api/role', roleRouter)
 app.use('/api/software', softwareRouter)
 app.use('/api/equipment', equipmentRouter)
 app.use('/api/supply', supplyRouter)
-app.use('/api/qrtest', qrtest)
+
 
 app.listen(port, () => {
   console.log(`REST API listening at http://localhost:${port}`)
