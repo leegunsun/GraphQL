@@ -24,8 +24,8 @@ app.use('/api/equipment', equipmentRouter)
 app.use('/api/supply', supplyRouter)
 
 // Serve apple-app-site-association file
-app.get('/.well-known/apple-app-site-association', (req, res) => {
-  res.type('application/json');
+app.get('/scan', (req, res) => {
+  res.set('Content-Type', 'application/json');
   res.sendFile(path.join(__dirname, '.well-known/apple-app-site-association'));
 });
 
