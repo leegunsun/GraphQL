@@ -8,12 +8,14 @@ const softwareRouter = require('./routes/software.js')
 const equipmentRouter = require('./routes/equipment.js')
 const supplyRouter = require('./routes/supply.js')
 const qrtest = require('./routes/qrtest.js')
+const health = require('./routes/health.js')
 
 const port = 3000
 
 app.use(express.json())
 app.use(express.urlencoded())
 
+app.use('/health', health)
 app.use('/.well-known/apple-app-site-association', qrtest)
 app.use('/api/team', teamRouter)
 app.use('/api/people', peopleRouter)
