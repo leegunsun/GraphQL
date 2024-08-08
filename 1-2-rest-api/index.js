@@ -14,7 +14,7 @@ const health = require('./routes/health.js')
 const port = 3000
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/health', health)
 app.use('/api/team', teamRouter)
@@ -24,26 +24,10 @@ app.use('/api/software', softwareRouter)
 app.use('/api/equipment', equipmentRouter)
 app.use('/api/supply', supplyRouter)
 
-// // Serve apple-app-site-association file
-// app.get('/scan', (req, res) => {
-//   const filePath = path.join(__dirname, '.well-known', 'apple-app-site-association');
-  
-//   // 파일 읽기
-//   fs.readFile(filePath, 'utf8', (err, data) => {
-//     if (err) {
-//       return res.status(500).send('Error reading file');
-//     }
-
-//     // res.set('Content-Type', 'application/json');
-//     res.setHeader('Content-Type', 'application/json')
-//     res.send(data);
-//   });
-// });
-
-// 파일 경로 설정
+// 파일 경로 설정1
 const filePath = path.join(__dirname, '.well-known', 'apple-app-site-association');
 
-// '/scan' 경로에 대한 GET 요청 처리
+// '/.well-known/apple-app-site-association' 경로에 대한 GET 요청 처리
 app.get('/.well-known/apple-app-site-association', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -51,11 +35,11 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
             res.status(500).send('Unable to read the file');
         } else {
             // 성공적으로 파일 내용을 읽었을 때 JSON 형식으로 클라이언트에 전송
-            res.setHeader('Content-Type', 'application/json').send(data);
+            res.setHeader('Content-Type', 'application/json');
+            res.send(data);
         }
     });
 });
-
 
 app.listen(port, () => {
   console.log(`REST API listening at http://localhost:${port}`)
