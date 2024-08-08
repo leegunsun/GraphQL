@@ -1,4 +1,5 @@
 const express = require('express')
+const fs = require('fs');
 const path = require('path');
 const app = express()
 
@@ -25,8 +26,17 @@ app.use('/api/supply', supplyRouter)
 
 // Serve apple-app-site-association file
 app.get('/scan', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  res.sendFile(path.join(__dirname, '.well-known/apple-app-site-association'));
+  const filePath = path.join(__dirname, '.well-known/apple-app-site-association');
+  
+  // 파일 읽기
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Error reading file');
+    }
+
+    res.set('Content-Type', 'application/json');
+    res.send(data);
+  });
 });
 
 app.listen(port, () => {
