@@ -4,7 +4,11 @@
                "details": [
                  {
                    "appIDs": ["Z83T53XK53.com.sketch-wallet.ios"],
-                   "paths": [ "/sketchwallet/*" ]
+                   "components": [
+                    {
+                       "/": "*"
+                   }
+               ]
                  }
                ]
              }
