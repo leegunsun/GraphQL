@@ -1,24 +1,21 @@
-const express = require('express')
-const api = express.Router()
+const express = require('express');
+const router = express.Router();
+const axios = require('axios');
 
-api.get('/', (req, res) => {
-    let testsend = {
-             "applinks": {
-               "apps": [],
-               "details": [
-                 {
-                   "appID": "Z83T53XK53.com.sketch-wallet.ios",
-                   "paths": [ "/sketchwallet/*" ]
-                 }
-               ]
-             }
+const targetUrl = 'http://www.tqrtqr.shop/.well-known/apple-app-site-association';
+
+router.get('/', async (req, res) => {
+  try {
+    const response = await axios.get(targetUrl, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching the URL:', error);
+    res.status(500).send('Error fetching the URL');
   }
-  res.setHeader('Content-Type', 'application/json'); 
-  res.send(testsend)
-})
+});
 
-api.get('/an', (req, res) => {
-  return;
-})
-
-module.exports = api
+module.exports = router;
