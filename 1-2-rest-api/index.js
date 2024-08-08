@@ -36,7 +36,8 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
         } else {
             // 성공적으로 파일 내용을 읽었을 때 JSON 형식으로 클라이언트에 전송
             res.setHeader('Content-Type', 'application/json');
-            res.send(data);
+            res.status(200).send(data);
+            // res.send(data);
         }
     });
 });
