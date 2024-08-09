@@ -40,6 +40,28 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
     });
 });
 
+app.post('/testVersion', (req, res) => {
+
+    let data = {
+        androidForceUpdYn : "N",
+iosForceUpdYn :  "N",
+androidVersion:  "0.0.1",
+iosVersion :  "0.0.2",
+message :  "!!!!!!! 테스트 필수로 URL 수정 !!!!!!!!!",
+messageEng:  "A new version !!!!!!! 테스트 필수로 URL 수정 !!!!!!!!!",
+useYn :  "Y",
+reqType :  "01",
+crtDt :  "2023-08-16 07:41:17",
+    }
+
+    res.send(data);
+});
+
+
+
+
+
+
 // // 정적 파일을 위한 경로 설정
 // const wellKnownDirectory = path.join(__dirname, '.well-known');
 

@@ -1,15 +1,17 @@
 {
-             "applinks": {
-               "apps": [],
-               "details": [
-                 {
-                   "appIDs": ["Z83T53XK53.com.sketch-wallet.ios"],
-                   "components": [
-                    {
-                       "/": "*"
-                   }
-               ]
-                 }
-               ]
-             }
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["Z83T53XK53.com.sketch-wallet.ios"],
+        "components": [
+          {
+            "/": "*",
+            "?": { "userId": "*", "page": "*" },
+            "comment": "Opens the app and passes user ID and page info as parameters."
+          }
+        ]
+      }
+    ]
   }
+}
