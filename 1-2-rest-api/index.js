@@ -31,7 +31,8 @@ var urlMappings = {};
 
 app.get('/test11', (req, res) => {
     console.log(`apple-app-site-association Call`)
-    
+    console.log('req.headers["sec-ch-ua-platform"] -->')
+    console.log(req.headers["sec-ch-ua-platform"])
     res.redirect('/.well-known/apple-app-site-association');
 });
 
@@ -72,7 +73,7 @@ crtDt :  "2023-08-16 07:41:17",
 app.post('/checkServerStatus', (req, res) => {
     console.log(`checkServerStatus Call`)
     let data = {ServerDown :  "Y"}
-
+    
     res.send(data);
 });
 
