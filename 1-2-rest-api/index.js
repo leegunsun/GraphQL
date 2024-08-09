@@ -54,7 +54,7 @@ app.get('/redirect-to-app-store', (req, res) => {
         <body>
             <h1>Redirecting to App Store...</h1>
             <script type="text/javascript">
-                window.location.href = "https://apps.apple.com/app/idYOUR_APP_ID";
+                window.location.href = "https://apps.apple.com/app/1597866658";
             </script>
         </body>
         </html>
