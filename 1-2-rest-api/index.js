@@ -53,7 +53,6 @@ messageEng:  "A new version !!!!!!! 테스트 필수로 URL 수정 !!!!!!!!!",
 useYn :  "Y",
 reqType :  "01",
 crtDt :  "2023-08-16 07:41:17",
-ServerDown :  "Y"
     }
 
     res.send(data);
@@ -61,7 +60,7 @@ ServerDown :  "Y"
 
 app.post('/checkServerStatus', (req, res) => {
     console.log(`checkServerStatus Call`)
-    let data = {status: "false"}
+    let data = {ServerDown :  "Y"}
 
     res.send(data);
 });
