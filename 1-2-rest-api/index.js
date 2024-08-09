@@ -57,6 +57,12 @@ crtDt :  "2023-08-16 07:41:17",
     res.send(data);
 });
 
+app.post('/checkServerStatus', (req, res) => {
+
+    let data = {status: "false"}
+
+    res.send(data);
+});
 
 
 
