@@ -26,39 +26,30 @@ app.use('/api/supply', supplyRouter)
 
 const filePath = path.join(__dirname, '.well-known', 'apple-app-site-association');
 
+var urlMappings = {};
+
+
+app.get('/test11', (req, res) => {
+    console.log(`apple-app-site-association Call`)
+    
+    res.redirect('/.well-known/apple-app-site-association');
+});
+
 app.get('/.well-known/apple-app-site-association', (req, res) => {
     console.log(`apple-app-site-association Call`)
+    
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             // 파일 읽기 오류 처리
             res.status(500).send('Unable to read the file');
         } else {
+        
             // 캐싱 방지 헤더 설정
             res.setHeader('Cache-Control', 'no-store');
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send(data);
         }
     });
-});
-
-// 2. 앱스토어로 리디렉션 처리
-app.get('/redirect-to-app-store', (req, res) => {
-    res.send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Redirecting</title>
-        </head>
-        <body>
-            <h1>Redirecting to App Store...</h1>
-            <script type="text/javascript">
-                window.location.href = "https://apps.apple.com/app/1597866658";
-            </script>
-        </body>
-        </html>
-    `);
 });
 
 app.post('/testVersion', (req, res) => {
@@ -87,19 +78,54 @@ app.post('/checkServerStatus', (req, res) => {
 
 
 
+// // URL 매핑을 저장하기 위한 객체 (실제 환경에서는 DB를 사용)
+// var urlMappings = {};
 
+// // 고유 식별자 생성 함수
+// function generateUniqueId() {
+//     return crypto.randomBytes(16).toString('hex');
+// }
 
-// // 정적 파일을 위한 경로 설정
-// const wellKnownDirectory = path.join(__dirname, '.well-known');
+// // 사용자가 특정 URL을 클릭했을 때 이 엔드포인트를 호출한다고 가정
+// app.get('/deferred-deep-link', (req, res) => {
+//     console.log(`Deferred deep link accessed`);
+    
+//     const deviceInfo = {
+//         userAgent: req.headers['user-agent'],
+//         ip: req.ip,
+//     };
+    
+//     // 고유 식별자 생성
+//     const uniqueId = generateUniqueId();
 
-// // .well-known 폴더를 정적으로 제공하되, 특정 파일에 대해 MIME 타입을 설정
-// app.use('/.well-known', express.static(wellKnownDirectory, {
-//     setHeaders: (res, path) => {
-//         if (path.endsWith('apple-app-site-association')) {
-//             res.setHeader('Content-Type', 'application/json');
-//         }
+//     // URL 쿼리 파라미터 가져오기
+//     const urlQuery = req.query;
+
+//     // 고유 식별자와 URL 정보를 매핑하여 저장
+//     urlMappings[uniqueId] = { urlQuery, deviceInfo };
+    
+//     // 클라이언트에게 고유 식별자 전달 (앱 설치 후 이 식별자를 사용하게 됩니다)
+//     res.status(200).json({ uniqueId });
+// });
+
+// // 앱이 설치된 후 처음 실행될 때 호출되는 엔드포인트
+// app.post('/retrieve-link-info', (req, res) => {
+//     console.log(`Retrieve link info request`);
+    
+//     const uniqueId = req.body.uniqueId; // 클라이언트로부터 받은 고유 식별자
+
+//     if (urlMappings[uniqueId]) {
+//         // 고유 식별자에 매핑된 URL 정보 반환
+//         const linkInfo = urlMappings[uniqueId];
+//         res.status(200).json(linkInfo);
+        
+//         // 일회용으로 사용할 경우 매핑 정보 삭제
+//         delete urlMappings[uniqueId];
+//     } else {
+//         // 고유 식별자에 대한 매핑 정보가 없을 경우
+//         res.status(404).json({ error: 'No mapping found for the provided uniqueId' });
 //     }
-// }));
+// });
 
 
 
