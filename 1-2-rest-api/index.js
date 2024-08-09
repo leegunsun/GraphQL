@@ -41,6 +41,26 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
     });
 });
 
+// 2. 앱스토어로 리디렉션 처리
+app.get('/redirect-to-app-store', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting</title>
+        </head>
+        <body>
+            <h1>Redirecting to App Store...</h1>
+            <script type="text/javascript">
+                window.location.href = "https://apps.apple.com/app/idYOUR_APP_ID";
+            </script>
+        </body>
+        </html>
+    `);
+});
+
 app.post('/testVersion', (req, res) => {
     console.log(`testVersion Call`)
     let data = {
