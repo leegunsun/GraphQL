@@ -30,15 +30,26 @@ var urlMappings = {};
 
 
 app.get('/test11', (req, res) => {
-    console.log(`apple-app-site-association Call`)
-    console.log('req.headers["sec-ch-ua-platform"] -->')
-    console.log(req.headers["sec-ch-ua-platform"])
-    res.redirect('/.well-known/apple-app-site-association');
+    
+    const userAgent = req.headers['user-agent'].toLowerCase();
+
+    if (userAgent.includes('android')) {
+        // 안드로이드 휴대폰인 경우
+        res.send('You are using an Android device');
+    } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+        // iOS 휴대폰 (iPhone 또는 iPad)인 경우
+        res.redirect('https://tqrtqr.shop/.well-known/apple-app-site-association');
+    } else {
+        // 기타 경우
+        res.send('Unknown device');
+    }
 });
+
 
 app.get('/.well-known/apple-app-site-association', (req, res) => {
     console.log(`apple-app-site-association Call`)
-    
+    console.log(req.headers["user-agent"])
+    console.log(req.headers["sec-ch-ua-platform"])
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             // 파일 읽기 오류 처리
