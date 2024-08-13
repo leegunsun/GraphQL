@@ -30,18 +30,17 @@ var urlMappings = {};
 
 
 app.get('/test11', (req, res) => {
-    
     const userAgent = req.headers['user-agent'].toLowerCase();
 
     if (userAgent.includes('android')) {
-        // 안드로이드 휴대폰인 경우
-        res.send('You are using an Android device');
+        // 안드로이드 휴대폰인 경우 Google Play Store 페이지로 리디렉트
+        res.redirect('market://details?id=com.sketch.pay');
     } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
-        // iOS 휴대폰 (iPhone 또는 iPad)인 경우
-        res.redirect('https://tqrtqr.shop/.well-known/apple-app-site-association');
+        // iOS 휴대폰 (iPhone 또는 iPad)인 경우 App Store 페이지로 리디렉트
+        res.redirect('https://apps.apple.com/app/id[여기에 앱 ID 입력]');
     } else {
-        // 기타 경우
-        res.send('Unknown device');
+        // 기타 경우 일반 웹페이지 또는 안내 페이지로 리디렉트
+        res.redirect('http://www.yourwebsite.com/download');
     }
 });
 
