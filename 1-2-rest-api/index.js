@@ -40,7 +40,7 @@ app.get('/test11', (req, res) => {
         res.redirect('https://apps.apple.com/app/id[여기에 앱 ID 입력]');
     } else {
         // 기타 경우 일반 웹페이지 또는 안내 페이지로 리디렉트
-        res.redirect('http://www.yourwebsite.com/download');
+        res.redirect('market://details?id=com.sketch.pay');
     }
 });
 
